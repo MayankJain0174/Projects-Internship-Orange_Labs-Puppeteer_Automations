@@ -8,11 +8,15 @@ const puppeteer = require('puppeteer');
   await page.setViewport({ width: 1366, height: 768 });
   await page.goto('https://swap.defillama.com');
 
+  //wait for form to appear
    await page.waitForSelector('input[id="react-select-2-input"]', { timeout: 5000 });
 
+   //Chain Field Selection
   await page.type('input[id="react-select-2-input"]', 'Arbitrum One');
   page.keyboard.press('Enter');
 
+
+  //"You Sell" Text Field
    const sellInput = await page.$('.css-79elbk input[type="text"]');
   await sellInput.click({ clickCount: 3 });
   await sellInput.type('12');
@@ -24,6 +28,7 @@ const puppeteer = require('puppeteer');
     }, buttonIndex);
   };
 
+  //"You Sell" Token Button
    await clickButton(3);
 
   await new Promise(r => setTimeout(r, 500));
@@ -42,6 +47,7 @@ const puppeteer = require('puppeteer');
 
    await selectToken('Wrapped BTC (WBTC)');
 
+   // "You Buy" Token Button
   await clickButton(5);
   await page.waitForSelector('input[class="chakra-input css-s1d1f4"]', { timeout: 1000 });
   await page.type('input[class="chakra-input css-s1d1f4"]', 'USDC');
@@ -50,7 +56,8 @@ const puppeteer = require('puppeteer');
 
    await page.waitForSelector('div[class="sc-55ee4011-2 fcGAPg"]', { timeout: 3000 });
   await new Promise(r => setTimeout(r, 4000));
-  
+
+  //Select 2nd Route option
    await page.evaluate(() => {
     const options = document.getElementsByClassName("sc-55ee4011-2 fcGAPg");
     const childNodes = options[0].childNodes;
