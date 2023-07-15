@@ -15,7 +15,6 @@ const puppeteer = require('puppeteer');
   await page.type('input[id="react-select-2-input"]', 'Arbitrum One');
   page.keyboard.press('Enter');
 
-
   //"You Sell" Text Field
    const sellInput = await page.$('.css-79elbk input[type="text"]');
   await sellInput.click({ clickCount: 3 });
